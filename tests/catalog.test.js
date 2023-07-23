@@ -1,5 +1,5 @@
-import _ from "lodash"
-import Catalog from "../catalog"
+import _ from "../utils/lodash"
+import Catalog from "../modules/catalog"
 
 const catalogData = {
   authorsById: {

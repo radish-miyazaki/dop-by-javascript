@@ -1,5 +1,5 @@
-import _ from "lodash"
-import {diff, havePathInCommon} from "./util"
+import _ from "../utils/lodash"
+import {diff, havePathInCommon} from "../utils/diff"
 
 export default class SystemConsistency {
   static threeWayMerge(current, previous, next) {

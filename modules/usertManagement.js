@@ -1,4 +1,4 @@
-import _ from "lodash"
+import _ from "../utils/lodash"
 
 export default class UserManagement {
   static addMember(userManagement, member) {

@@ -1,5 +1,5 @@
 import SystemState from "./systemState"
-import Library from "./library"
+import Library from "../modules/library"
 
 export default class System {
 	addMember(member) {

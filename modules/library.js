@@ -1,4 +1,4 @@
-import _ from "lodash"
+import _ from "../utils/lodash"
 import Catalog from "../catalog"
 import UserManagement from "../userManagement"
 
