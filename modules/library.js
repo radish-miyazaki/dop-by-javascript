@@ -1,6 +1,6 @@
 import _ from "../utils/lodash"
-import Catalog from "../catalog"
-import UserManagement from "../userManagement"
+import Catalog from "./catalog"
+import UserManagement from "./userManagement"
 
 export default class Library {
   static searchBooksByTitleJSON(libraryData, query) {

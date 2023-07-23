@@ -26,8 +26,9 @@ export default class Catalog {
 
 		// _.filter にマップを渡すと、_.filter はそのマップの値を調べる
     const matchingBooks = _.filter(allBooks, function(book) {
-      return _.get(book, "title").includes(query)
+      return _.get(book, "title").toLowerCase().includes(query.toLowerCase())
     })
+
     const bookInfos = _.map(matchingBooks, function (book) {
       return Catalog.bookInfo(catalogData, book)
     })
