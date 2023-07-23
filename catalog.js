@@ -1,6 +1,7 @@
-class Catalog {
-  static authorNames(catalogData, book) {
-    const authorIds = _.get(book, "authorIds")
+import _ from "lodash"
+
+export default class Catalog {
+  static authorNames(catalogData, authorIds) {
     const names = _.map(authorIds, function (authorId) {
       return _.get(catalogData, ["authorsById", authorId, "name"])
     })
@@ -11,7 +12,9 @@ class Catalog {
     const bookInfo = {
       "title": _.get(book, "title"),
       "isbn": _.get(book, "isbn"),
-      "authorNames": Catalog.authorNames(catalogData, book)
+      "authorNames": Catalog.authorNames(catalogData,
+        _.get(book, "authorIds")
+      )
     }
 
 		// bookInfo のためのクラスを作成する必要はない

@@ -17,7 +17,7 @@ function diffObjects(data1, data2) {
   );
 }
 
-function diff(data1, data2) {
+export default function diff(data1, data2) {
   if (_.isObject(data1) && _.isObject(data2)) {
     return diffObjects(data1, data2);
   }
@@ -30,7 +30,7 @@ function diff(data1, data2) {
   return "no-diff";
 }
 
-function informationPaths(obj, path = []) {
+export default function informationPaths(obj, path = []) {
   return _.reduce(obj, function (acc, v, k) {
     if (_.isObject(v)) {
       return _.concat(acc,
@@ -42,7 +42,7 @@ function informationPaths(obj, path = []) {
   } , [])
 }
 
-function havePathInCommon(diff1, diff2) {
+export default function havePathInCommon(diff1, diff2) {
   return !_.isEmpty(
 		_.intersection(informationPaths(diff1), informationPaths(diff2))
 	)

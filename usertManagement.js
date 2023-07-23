@@ -1,4 +1,6 @@
-class UserManagement {
+import _ from "lodash"
+
+export default class UserManagement {
   static addMember(userManagement, member) {
     const email = _.get(member, 'email')
     const infoPath = ['membersByEmail', email]

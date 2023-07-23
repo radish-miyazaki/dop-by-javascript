@@ -1,4 +1,7 @@
-class SystemConsistency {
+import _ from "lodash"
+import {diff, havePathInCommon} from "./util"
+
+export default class SystemConsistency {
   static threeWayMerge(current, previous, next) {
     const previousToCurrent = diff(previous, current)
     const previousToNext = diff(previous, next)

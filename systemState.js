@@ -1,4 +1,7 @@
-class SystemState {
+import _ from "lodash"
+import SystemConsistency from "./systemConsistency"
+
+export default class SystemState {
   systemData
   prevSystemData
 

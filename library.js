@@ -1,4 +1,8 @@
-class Library {
+import _ from "lodash"
+import Catalog from "../catalog"
+import UserManagement from "../userManagement"
+
+export default class Library {
   static searchBooksByTitleJSON(libraryData, query) {
     const catalogData = _.get(libraryData, "catalog")
     const results = Catalog.searchBooksByTitle(catalogData, query)
