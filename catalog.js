@@ -1,12 +1,4 @@
 class Catalog {
-  // static getBookLendings(catalogData, memberId) {
-  //   throw 'Not implemented'
-  // }
-
-  // static addBookItem(catalogData, bookItemInfo) {
-  //   throw 'Not implemented'
-  // }
-
   static authorNames(catalogData, book) {
     const authorIds = _.get(book, "authorIds")
     const names = _.map(authorIds, function (authorId) {
