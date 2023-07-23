@@ -12,6 +12,13 @@ const catalogData = {
   }
 }
 
+const book = {
+  isbn: '978-1779501127',
+  title: 'Watchmen',
+  publicationYear: 1987,
+  authorIds: ['alan-moore', 'dave-gibbons'],
+}
+
 describe("Catalog", () => {
   describe("authorNames", () => {
     it("returns empty array when given empty array", () => {
@@ -59,6 +66,18 @@ describe("Catalog", () => {
     it("returns undefined when given author ids", () => {
       const actual = Catalog.authorNames(catalogData, ["alan-moore", "albert-einstein"])
       const expected = ["Alan Moore", undefined]
+      expect(actual).toEqual(expected)
+    })
+  })
+
+  describe("bookInfo", () => {
+    it("returns book info", () => {
+      const actual = Catalog.bookInfo(catalogData, book)
+      const expected = {
+        "title": "Watchmen",
+        "isbn": "978-1779501127",
+        "authorNames": ["Alan Moore", "Dave Gibbons"]
+      }
       expect(actual).toEqual(expected)
     })
   })
