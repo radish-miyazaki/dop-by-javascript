@@ -13,10 +13,6 @@ export default class SystemState {
     const systemDataBeforeUpdate = this.systemData
     const nextSystemData = SystemConsistency.reconcile(this.systemData, prev, next)
 
-    // if(!SystemValidity.validate(prev, nextSystemData)) {
-    //   throw 'The data to be committed is not valid'
-    // }
-
     this.systemData = nextSystemData
     this.prevSystemData = systemDataBeforeUpdate
   }
