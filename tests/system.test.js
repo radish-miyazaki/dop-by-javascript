@@ -1,15 +1,15 @@
-import _ from "../utils/lodash"
+import Immutable from "../utils/immutable"
 import System from "../systems/system"
 import SystemState from "../systems/systemState"
 
 describe("System", () => {
   describe("addBook", () => {
-    const jessie = {
+    const jessie = Immutable.fromJS({
       email: "jessie@gmail.com",
       password: "my-secret"
-    }
+    })
 
-    const libraryStateBefore = {
+    const libraryStateBefore = Immutable.fromJS({
       userManagement: {
         membersByEmail: {
           "franck@gmail.com": {
@@ -18,9 +18,9 @@ describe("System", () => {
           }
         }
       }
-    }
+    })
 
-    const expectedLibraryStateAfter = {
+    const expectedLibraryStateAfter = Immutable.fromJS({
       userManagement: {
         membersByEmail: {
           "jessie@gmail.com": {
@@ -33,14 +33,14 @@ describe("System", () => {
           }
         }
       }
-    }
+    })
 
     it("adds a book to the library state", () => {
       const systemState = new SystemState()
       systemState.commit(null, libraryStateBefore)
 
       System.addMember(systemState, jessie)
-      expect(_.isEqual(systemState.get(), expectedLibraryStateAfter)).toBe(true)
+      expect(Immutable.isEqual(systemState.get(), expectedLibraryStateAfter)).toBe(true)
     })
   })
 })

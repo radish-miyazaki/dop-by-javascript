@@ -1,18 +1,17 @@
-import _ from "../utils/lodash"
+import Immutable from "../utils/immutable"
 
 export default class UserManagement {
   static addMember(userManagement, member) {
-    const email = _.get(member, 'email')
+    const email = Immutable.get(member, 'email')
     const infoPath = ['membersByEmail', email]
 
-    if (_.has(userManagement, infoPath)) {
+    if (Immutable.hasIn(userManagement, infoPath)) {
       throw 'Member already exists'
     }
 
-    const nextUserManagement = _.set(
+    return Immutable.setIn(
       userManagement,
       infoPath,
       member)
-    return nextUserManagement
   }
 }

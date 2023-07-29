@@ -1,4 +1,4 @@
-import _ from "../utils/lodash"
+import Immutable from "../utils/immutable"
 import { diff, havePathInCommon } from "../utils/diff"
 
 export default class SystemConsistency {
@@ -7,7 +7,7 @@ export default class SystemConsistency {
     const previousToNext = diff(previous, next)
 
     if (havePathInCommon(previousToCurrent, previousToNext)) {
-      return _.merge(current, previousToNext)
+      return Immutable.merge(current, previousToNext)
     }
 
     throw 'Conflicting concurrent mutations.'

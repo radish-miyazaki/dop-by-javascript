@@ -1,10 +1,10 @@
-import _ from "../utils/lodash"
+import Immutable from "../utils/immutable"
 import Catalog from "./catalog"
 import UserManagement from "./userManagement"
 
 export default class Library {
   static searchBooksByTitleJSON(libraryData, query) {
-    const catalogData = _.get(libraryData, "catalog")
+    const catalogData = Immutable.get(libraryData, "catalog")
     const results = Catalog.searchBooksByTitle(catalogData, query)
 
     const resultsJSON = JSON.stringify(results)
@@ -12,13 +12,13 @@ export default class Library {
   }
 
   static addMember(libraryData, member) {
-    const currentUserManagement = _.get(libraryData, "userManagement")
+    const currentUserManagement = Immutable.get(libraryData, "userManagement")
     const nextUserManagement = UserManagement.addMember(
       currentUserManagement,
       member
     )
 
-    const nextLibraryData = _.set(
+    const nextLibraryData = Immutable.set(
       libraryData,
       "userManagement",
       nextUserManagement

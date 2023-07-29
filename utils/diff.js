@@ -1,24 +1,26 @@
+import Immutable from "./immutable";
+
 function diffObjects(data1, data2) {
-  const emptyObject = _.isArray(data1) ? [] : {};
+  const emptyObject = Immutable.isArray(data1) ? Immutable.fromJS([]) : Immutable.fromJS({})
   if (data1 === data2) return emptyObject;
 
   // _.union は 2つの配列からなら一意の配列を作成する
-  const keys = _.union(_.keys(data1), _.keys(data2));
+  const keys = Immutable.union(Immutable.keys(data1), Immutable.keys(data2));
 
-  return _.reduce(
+  return Immutable.reduce(
     keys,
     function (acc, k) {
-      const res = diff(_.get(data1, k), _.get(data2, k));
-      if ((_.isObject(res) && _.isEmpty(res)) || res === "no-diff") return acc;
+      const res = diff(Immutable.get(data1, k), Immutable.get(data2, k));
+      if ((Immutable.isObject(res) && Immutable.isEmpty(res)) || res === "no-diff") return acc;
 
-      return _.set(acc, [k], res);
+      return Immutable.set(acc, [k], res);
     },
     emptyObject
   );
 }
 
 function diff(data1, data2) {
-  if (_.isObject(data1) && _.isObject(data2)) {
+  if (Immutable.isObject(data1) && Immutable.isObject(data2)) {
     return diffObjects(data1, data2);
   }
 
@@ -31,20 +33,20 @@ function diff(data1, data2) {
 }
 
 function informationPaths(obj, path = []) {
-  return _.reduce(obj, function (acc, v, k) {
-    if (_.isObject(v)) {
-      return _.concat(acc,
-        informationPaths(v, _.concat(path, k))
+  return Immutable.reduce(obj, function (acc, v, k) {
+    if (Immutable.isObject(v)) {
+      return Immutable.concat(acc,
+        informationPaths(v, Immutable.concat(path, k))
       )
     }
 
-    return _.concat(acc, [_.concat(path, k)])
+    return Immutable.concat(acc, [Immutable.concat(path, k)])
   } , [])
 }
 
 function havePathInCommon(diff1, diff2) {
-  return !_.isEmpty(
-		_.intersection(informationPaths(diff1), informationPaths(diff2))
+  return !Immutable.isEmpty(
+		informationPaths(diff1).intersect(informationPaths(diff2))
 	)
 }
 

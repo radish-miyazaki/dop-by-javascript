@@ -1,4 +1,3 @@
-import _ from "../utils/lodash"
 import SystemConsistency from "./systemConsistency"
 
 export default class SystemState {

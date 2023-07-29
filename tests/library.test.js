@@ -1,8 +1,8 @@
-import _ from "../utils/lodash"
+import Immutable from "../utils/immutable"
 import Library from "../modules/library"
 
 describe("Library", () => {
-  const libraryData = {
+  const libraryData = Immutable.fromJS({
     "catalog": {
       "booksByIsbn": {
         "978-1779501127": {
@@ -35,35 +35,35 @@ describe("Library", () => {
         },
       }
     }
-  }
+  })
 
-  const bookInfo = {
+  const bookInfo = Immutable.fromJS({
     "isbn": "978-1779501127",
     "title": "Watchmen",
     "authorNames": ["Alan Moore", "Dave Gibbons"]
-  }
+  })
 
   describe("searchBooksByTitleJSON", () => {
     it("returns book info when given book title", () => {
-      const actual = JSON.parse(Library.searchBooksByTitleJSON(libraryData, "Watchmen"))
-      const expected = [bookInfo]
-      expect(actual).toEqual(expected)
+      const actual = Immutable.parseJSON(Library.searchBooksByTitleJSON(libraryData, "Watchmen"))
+      const expected = Immutable.fromJS([bookInfo])
+      expect(Immutable.isEqual(actual, expected)).toBe(true)
     })
 
     it("returns empty array when given not exist title", () => {
-      const actual = JSON.parse(Library.searchBooksByTitleJSON(libraryData, "Batman"))
-      const expected = []
-      expect(actual).toEqual(expected)
+      const actual = Immutable.parseJSON(Library.searchBooksByTitleJSON(libraryData, "Batman"))
+      const expected = Immutable.fromJS([])
+      expect(Immutable.isEqual(actual, expected)).toBe(true)
     })
   })
 
   describe("addMember", () => {
-    const jessie = {
+    const jessie = Immutable.fromJS({
       email: "jessie@gmail.com",
       password: "my-secret"
-    }
+    })
 
-    const libraryStateBefore = {
+    const libraryStateBefore = Immutable.fromJS({
       userManagement: {
         membersByEmail: {
           "franck@gmail.com": {
@@ -72,9 +72,9 @@ describe("Library", () => {
           }
         }
       }
-    }
+    })
 
-    const expectedLibraryStateAfter = {
+    const expectedLibraryStateAfter = Immutable.fromJS({
       userManagement: {
         membersByEmail: {
           "jessie@gmail.com": {
@@ -87,11 +87,11 @@ describe("Library", () => {
           }
         }
       }
-    }
+    })
 
     it("adds a member to the user management state", () => {
       const actual = Library.addMember(libraryStateBefore, jessie)
-      expect(_.isEqual(actual, expectedLibraryStateAfter)).toBe(true)
+      expect(Immutable.isEqual(actual, expectedLibraryStateAfter)).toBe(true)
     })
   })
 })
